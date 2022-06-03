@@ -16,7 +16,8 @@ const Reviews = () => {
       }
       setReviews(r);
     });
-  }, []);
+  }, [movieId]);
+
   return (
     <ReviewList>
       {!!reviews.length &&

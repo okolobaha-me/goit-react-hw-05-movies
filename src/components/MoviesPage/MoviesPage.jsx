@@ -31,7 +31,7 @@ const MoviesPage = () => {
         query: query,
       }).toString(),
     });
-  }, [query]);
+  }, [query, location.search, navigate]);
 
   const formik = useFormik({
     initialValues: {

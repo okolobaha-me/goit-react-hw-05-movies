@@ -20,7 +20,7 @@ const MovieDetailsPage = () => {
 
   useEffect(() => {
     getMovieDetails(movieId).then(r => setFilm(r));
-  }, []);
+  }, [movieId]);
 
   return (
     <>

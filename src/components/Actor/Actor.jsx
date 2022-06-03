@@ -10,7 +10,7 @@ export const Actor = ({ actor }) => {
     getActorPhoto(actor.id).then(r => {
       setImage(`https://image.tmdb.org/t/p/w500${r}`);
     });
-  }, []);
+  }, [actor.id]);
 
   return (
     <ActorItem>

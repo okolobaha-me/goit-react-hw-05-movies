@@ -10,7 +10,7 @@ const Cast = () => {
 
   useEffect(() => {
     getMovieCredits(movieId).then(r => setCast(r));
-  }, []);
+  }, [movieId]);
 
   return (
     <Actors>
