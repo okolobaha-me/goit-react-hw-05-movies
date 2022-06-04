@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Container } from '../Header/Header.styled';
+import { Container } from '../../components/Header/Header.styled';
 
 const PageNotFound = () => {
   return (

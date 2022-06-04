@@ -36,7 +36,11 @@ export const searchMovies = query => {
 };
 
 export const getMovieDetails = id => {
-  return getMovieDetailsRequest.get(`/${id}`).then(r => r.data);
+  try {
+    return getMovieDetailsRequest.get(`/${id}`).then(r => r.data);
+  } catch (e) {
+    throw Error;
+  }
 };
 
 export const getMovieCredits = id => {
@@ -52,7 +56,7 @@ export const getActorPhoto = async id => {
     return (await getActorPhotoRequest.get(`/${id}/images`)).data.profiles[0]
       .file_path;
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     return false;
   }
 };

@@ -4,23 +4,28 @@ import { Header } from './Header/Header';
 
 //lazy imports
 const HomePage = lazy(
-  () => import('./HomePage/HomePage') /* webpackChunkName: "home-page" */
+  () => import('../Pages/HomePage/HomePage') /* webpackChunkName: "home-page" */
 );
-const Cast = lazy(() => import('./Cast/Cast') /* webpackChunkName: "Cast */);
+const Cast = lazy(
+  () => import('../Pages/Cast/Cast') /* webpackChunkName: "Cast */
+);
 const MovieDetailsPage = lazy(
   () =>
     import(
-      './MovieDetailsPage/MovieDetailsPage'
+      '../Pages/MovieDetailsPage/MovieDetailsPage'
     ) /* webpackChunkName: "MovieDetailsPage" */
 );
 const MoviesPage = lazy(
-  () => import('./MoviesPage/MoviesPage') /* webpackChunkName: "MoviesPage" */
+  () =>
+    import(
+      '../Pages/MoviesPage/MoviesPage'
+    ) /* webpackChunkName: "MoviesPage" */
 );
 const Reviews = lazy(
   () => import('./Reviews/Reviews') /* webpackChunkName: "Reviews" */
 );
 const Error = lazy(
-  () => import('./404/PageNotFound') /* webpackChunkName: "404 Error" */
+  () => import('../Pages/404/PageNotFound') /* webpackChunkName: "404 Error" */
 );
 
 export const App = () => {

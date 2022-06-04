@@ -13,13 +13,17 @@ import {
   Option,
 } from './MovieDetailsPage.styled';
 import { getGenres } from '../../js/getGenres';
+import PageNotFound from '../404/PageNotFound';
 
 const MovieDetailsPage = () => {
   const [film, setFilm] = useState({});
+  const [error, setError] = useState(false);
   const { movieId } = useParams();
 
   useEffect(() => {
-    getMovieDetails(movieId).then(r => setFilm(r));
+    getMovieDetails(movieId)
+      .then(r => setFilm(r))
+      .catch(() => setError(true));
   }, [movieId]);
 
   return (
@@ -49,6 +53,8 @@ const MovieDetailsPage = () => {
           </DataWrapper>
         </Section>
       )}
+
+      {error && <PageNotFound />}
     </>
   );
 };

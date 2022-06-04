@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getMovieCredits } from '../../js/API';
 import { Actors } from './Cast.styled';
-import { Actor } from '../Actor/Actor';
+import { Actor } from '../../components/Actor/Actor';
 
 const Cast = () => {
   const { movieId } = useParams();

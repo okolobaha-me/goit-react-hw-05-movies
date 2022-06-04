@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import { createSearchParams, useLocation, useNavigate } from 'react-router-dom';
 import { searchMovies } from '../../js/API';
-import { FilmList } from '../FilmList/FilmList';
+import { FilmList } from '../../components/FilmList/FilmList';
 import { Form } from './MoviesPage.styled';
+import { Notify } from 'notiflix';
 
 const MoviesPage = () => {
   const [films, setFilms] = useState([]);
@@ -37,7 +38,14 @@ const MoviesPage = () => {
     initialValues: {
       query: initial,
     },
-    onSubmit: values => setQuery(values.query),
+    onSubmit: values => {
+      const { query } = values;
+      if (!query.trim()) {
+        Notify.failure('Please enter something in deasch field');
+        return;
+      }
+      setQuery(query.trim());
+    },
   });
 
   return (
