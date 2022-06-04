@@ -48,6 +48,11 @@ export const getMovieReviews = id => {
 };
 
 export const getActorPhoto = async id => {
-  return (await getActorPhotoRequest.get(`/${id}/images`)).data.profiles[0]
-    .file_path;
+  try {
+    return (await getActorPhotoRequest.get(`/${id}/images`)).data.profiles[0]
+      .file_path;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
 };
