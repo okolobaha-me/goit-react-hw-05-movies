@@ -1,5 +1,5 @@
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getMovieDetails } from '../../js/API';
 import {
   Data,
@@ -21,15 +21,18 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const location = useLocation()
   const navigation = useNavigate()
+  const goBackPath = useRef(null);
 
   useEffect(() => {
+    goBackPath.current = location.state?.from || null
     getMovieDetails(movieId)
       .then(r => setFilm(r))
       .catch(() => setError(true));
   }, [movieId]);
 
   const handleGoBackClick = () => {
-    navigation(location.state.from)
+    const path = goBackPath.current || '/'
+    navigation(path)
   }
 
   return (
