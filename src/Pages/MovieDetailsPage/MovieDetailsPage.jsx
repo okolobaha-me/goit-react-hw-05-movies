@@ -1,4 +1,4 @@
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getMovieDetails } from '../../js/API';
 import {
@@ -19,6 +19,8 @@ const MovieDetailsPage = () => {
   const [film, setFilm] = useState({});
   const [error, setError] = useState(false);
   const { movieId } = useParams();
+  const location = useLocation()
+  const navigation = useNavigate()
 
   useEffect(() => {
     getMovieDetails(movieId)
@@ -26,12 +28,17 @@ const MovieDetailsPage = () => {
       .catch(() => setError(true));
   }, [movieId]);
 
+  const handleGoBackClick = () => {
+    navigation(location.state.from)
+  }
+
   return (
     <>
       {film.title && (
         <Section>
           <Image src={`https://image.tmdb.org/t/p/w500${film.poster_path}`} />
           <DataWrapper>
+            <button type='button' onClick={handleGoBackClick}>Go back</button>
             <FilmTitle>
               {film.title} ({film.release_date.slice(0, 4)})
             </FilmTitle>
