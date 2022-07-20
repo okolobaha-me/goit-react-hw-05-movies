@@ -19,21 +19,30 @@ const MovieDetailsPage = () => {
   const [film, setFilm] = useState({});
   const [error, setError] = useState(false);
   const { movieId } = useParams();
-  const location = useLocation()
-  const navigation = useNavigate()
+  const location = useLocation();
+  const navigation = useNavigate();
   const goBackPath = useRef(null);
+  const isFirstLoad = useRef(true);
 
   useEffect(() => {
-    goBackPath.current = location.state?.from || null
+    if (!isFirstLoad.current) return;
+    isFirstLoad.current = false;
+    goBackPath.current = location.state?.from || null;
+
+    console.log(goBackPath.current);
+  }, [location.state?.from]);
+
+  useEffect(() => {
     getMovieDetails(movieId)
       .then(r => setFilm(r))
       .catch(() => setError(true));
   }, [movieId]);
 
   const handleGoBackClick = () => {
-    const path = goBackPath.current || '/'
-    navigation(path)
-  }
+    console.log(goBackPath.current);
+    const path = goBackPath.current || '/';
+    navigation(path);
+  };
 
   return (
     <>
@@ -41,7 +50,9 @@ const MovieDetailsPage = () => {
         <Section>
           <Image src={`https://image.tmdb.org/t/p/w500${film.poster_path}`} />
           <DataWrapper>
-            <button type='button' onClick={handleGoBackClick}>Go back</button>
+            <button type="button" onClick={handleGoBackClick}>
+              Go back
+            </button>
             <FilmTitle>
               {film.title} ({film.release_date.slice(0, 4)})
             </FilmTitle>
